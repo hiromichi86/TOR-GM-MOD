@@ -119,7 +119,8 @@ namespace TheOtherRoles.Modules {
             {
                 HttpClient http = new HttpClient();
                 http.DefaultRequestHeaders.Add("User-Agent", "TheOtherRoles Updater");
-                var response = await http.GetAsync(new System.Uri("https://api.github.com/repos/yukinogatari/TheOtherRoles-GM/releases/latest"), HttpCompletionOption.ResponseContentRead);
+                //var response = await http.GetAsync(new System.Uri("https://api.github.com/repos/yukinogatari/TheOtherRoles-GM/releases/latest"), HttpCompletionOption.ResponseContentRead);
+                var response = await http.GetAsync(new System.Uri("https://api.github.com/repos/hiromichi86/TheOtherRoles-GM-clone/releases/latest"), HttpCompletionOption.ResponseContentRead);
                 if (response.StatusCode != HttpStatusCode.OK || response.Content == null)
                 {
                     System.Console.WriteLine("Server returned no data: " + response.StatusCode.ToString());

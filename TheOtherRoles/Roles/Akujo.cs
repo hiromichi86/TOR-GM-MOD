@@ -116,7 +116,7 @@ namespace TheOtherRoles
                             timeLimitText.enabled = Helpers.ShowButtons;
                         }
                     }
-                    else if (timeLeft <= 0 && (honmei == null || keepsLeft == numKeeps))
+                    else if (timeLeft <= 0 && (honmei == null || keepsLeft > 0))
                     {
                         MessageWriter writer = AmongUsClient.Instance.StartRpcImmediately(PlayerControl.LocalPlayer.NetId, (byte)CustomRPC.AkujoSuicide, Hazel.SendOption.Reliable, -1);
                         writer.Write(player.PlayerId);
