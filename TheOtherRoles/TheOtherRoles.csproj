@@ -1,0 +1,280 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+    <PropertyGroup>
+        <TargetFramework>netstandard2.1</TargetFramework>
+        <Version>3.5.5.1</Version>
+        <Description>TheOtherRoles: GM Edition</Description>
+        <Authors>Eisbison</Authors>
+    </PropertyGroup>
+
+    <PropertyGroup>
+        <DefineConstants>$(DefineConstants);STEAM</DefineConstants>
+        <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+        <ApplicationIcon />
+        <Win32Resource />
+        <AssemblyName>TheOtherRolesGM</AssemblyName>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <EmbeddedResource Include="Resources\CustomHats\*.png" />
+		<EmbeddedResource Include="Resources\*.png" />
+		<EmbeddedResource Include="Resources\*.json" />
+        <EmbeddedResource Include="Resources\TricksterAnimation\*.png" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <Reference Include="$(AmongUs)/BepInEx/core/*.dll" />
+        <Reference Include="$(AmongUs)/BepInEx/unhollowed/*.dll" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Reference Include="0Harmony">
+        <HintPath>..\..\BepInEx-6.0.0-reactor.23\BepInEx\core\0Harmony.dll</HintPath>
+      </Reference>
+      <Reference Include="AddressablesPlayAssetDelivery">
+        <HintPath>..\..\tools\AmongUs\Unhollowed\AddressablesPlayAssetDelivery.dll</HintPath>
+      </Reference>
+      <Reference Include="AppleAuth">
+        <HintPath>..\..\tools\AmongUs\Unhollowed\AppleAuth.dll</HintPath>
+      </Reference>
+      <Reference Include="Assembly-CSharp">
+        <HintPath>..\..\tools\AmongUs\Unhollowed\Assembly-CSharp.dll</HintPath>
+      </Reference>
+      <Reference Include="Assembly-CSharp-firstpass">
+        <HintPath>..\..\tools\AmongUs\Unhollowed\Assembly-CSharp-firstpass.dll</HintPath>
+      </Reference>
+      <Reference Include="AssemblyUnhollower">
+        <HintPath>..\..\BepInEx-6.0.0-reactor.23\BepInEx\core\AssemblyUnhollower.dll</HintPath>
+      </Reference>
+      <Reference Include="BepInEx.Core">
+        <HintPath>..\..\BepInEx-6.0.0-reactor.23\BepInEx\core\BepInEx.Core.dll</HintPath>
+      </Reference>
+      <Reference Include="BepInEx.IL2CPP">
+        <HintPath>..\..\BepInEx-6.0.0-reactor.23\BepInEx\core\BepInEx.IL2CPP.dll</HintPath>
+      </Reference>
+      <Reference Include="BepInEx.Preloader.Core">
+        <HintPath>..\..\BepInEx-6.0.0-reactor.23\BepInEx\core\BepInEx.Preloader.Core.dll</HintPath>
+      </Reference>
+      <Reference Include="Hazel">
+        <HintPath>..\..\tools\AmongUs\Unhollowed\Hazel.dll</HintPath>
+      </Reference>
+      <Reference Include="Iced">
+        <HintPath>..\..\tools\AmongUs\Unhollowed\Iced.dll</HintPath>
+      </Reference>
+      <Reference Include="Il2Cpp.TlsAdapter">
+        <HintPath>..\..\BepInEx-6.0.0-reactor.23\BepInEx\core\Il2Cpp.TlsAdapter.dll</HintPath>
+      </Reference>
+      <Reference Include="Il2CppDumper">
+        <HintPath>..\..\BepInEx-6.0.0-reactor.23\BepInEx\core\Il2CppDumper.dll</HintPath>
+      </Reference>
+      <Reference Include="Il2CppMono.Security">
+        <HintPath>..\..\tools\AmongUs\Unhollowed\Il2CppMono.Security.dll</HintPath>
+      </Reference>
+      <Reference Include="Il2Cppmscorlib">
+        <HintPath>..\..\tools\AmongUs\Unhollowed\Il2Cppmscorlib.dll</HintPath>
+      </Reference>
+      <Reference Include="Il2CppSystem">
+        <HintPath>..\..\tools\AmongUs\Unhollowed\Il2CppSystem.dll</HintPath>
+      </Reference>
+      <Reference Include="Il2CppSystem.Configuration">
+        <HintPath>..\..\tools\AmongUs\Unhollowed\Il2CppSystem.Configuration.dll</HintPath>
+      </Reference>
+      <Reference Include="Il2CppSystem.Core">
+        <HintPath>..\..\tools\AmongUs\Unhollowed\Il2CppSystem.Core.dll</HintPath>
+      </Reference>
+      <Reference Include="Il2CppSystem.Data">
+        <HintPath>..\..\tools\AmongUs\Unhollowed\Il2CppSystem.Data.dll</HintPath>
+      </Reference>
+      <Reference Include="Il2CppSystem.Net.Http">
+        <HintPath>..\..\tools\AmongUs\Unhollowed\Il2CppSystem.Net.Http.dll</HintPath>
+      </Reference>
+      <Reference Include="Il2CppSystem.Numerics">
+        <HintPath>..\..\tools\AmongUs\Unhollowed\Il2CppSystem.Numerics.dll</HintPath>
+      </Reference>
+      <Reference Include="Il2CppSystem.Runtime.Serialization">
+        <HintPath>..\..\tools\AmongUs\Unhollowed\Il2CppSystem.Runtime.Serialization.dll</HintPath>
+      </Reference>
+      <Reference Include="Il2CppSystem.Xml">
+        <HintPath>..\..\tools\AmongUs\Unhollowed\Il2CppSystem.Xml.dll</HintPath>
+      </Reference>
+      <Reference Include="Il2CppSystem.Xml.Linq">
+        <HintPath>..\..\tools\AmongUs\Unhollowed\Il2CppSystem.Xml.Linq.dll</HintPath>
+      </Reference>
+      <Reference Include="IngameDebugConsole.Runtime">
+        <HintPath>..\..\tools\AmongUs\Unhollowed\IngameDebugConsole.Runtime.dll</HintPath>
+      </Reference>
+      <Reference Include="Mono.Cecil">
+        <HintPath>..\..\BepInEx-6.0.0-reactor.23\BepInEx\core\Mono.Cecil.dll</HintPath>
+      </Reference>
+      <Reference Include="Mono.Cecil.Mdb">
+        <HintPath>..\..\BepInEx-6.0.0-reactor.23\BepInEx\core\Mono.Cecil.Mdb.dll</HintPath>
+      </Reference>
+      <Reference Include="Mono.Cecil.Pdb">
+        <HintPath>..\..\BepInEx-6.0.0-reactor.23\BepInEx\core\Mono.Cecil.Pdb.dll</HintPath>
+      </Reference>
+      <Reference Include="Mono.Cecil.Rocks">
+        <HintPath>..\..\BepInEx-6.0.0-reactor.23\BepInEx\core\Mono.Cecil.Rocks.dll</HintPath>
+      </Reference>
+      <Reference Include="MonoMod.RuntimeDetour">
+        <HintPath>..\..\BepInEx-6.0.0-reactor.23\BepInEx\core\MonoMod.RuntimeDetour.dll</HintPath>
+      </Reference>
+      <Reference Include="MonoMod.Utils">
+        <HintPath>..\..\BepInEx-6.0.0-reactor.23\BepInEx\core\MonoMod.Utils.dll</HintPath>
+      </Reference>
+      <Reference Include="Newtonsoft.Json">
+        <HintPath>..\..\tools\AmongUs\Unhollowed\Newtonsoft.Json.dll</HintPath>
+      </Reference>
+      <Reference Include="QRCoder">
+        <HintPath>..\..\tools\AmongUs\Unhollowed\QRCoder.dll</HintPath>
+      </Reference>
+      <Reference Include="Rewired_Core">
+        <HintPath>..\..\tools\AmongUs\Unhollowed\Rewired_Core.dll</HintPath>
+      </Reference>
+      <Reference Include="Rewired_Windows">
+        <HintPath>..\..\tools\AmongUs\Unhollowed\Rewired_Windows.dll</HintPath>
+      </Reference>
+      <Reference Include="SemVer">
+        <HintPath>..\..\BepInEx-6.0.0-reactor.23\BepInEx\core\SemVer.dll</HintPath>
+      </Reference>
+      <Reference Include="UnhollowerBaseLib">
+        <HintPath>..\..\tools\AmongUs\Unhollowed\UnhollowerBaseLib.dll</HintPath>
+      </Reference>
+      <Reference Include="UnhollowerRuntimeLib">
+        <HintPath>..\..\tools\AmongUs\Unhollowed\UnhollowerRuntimeLib.dll</HintPath>
+      </Reference>
+      <Reference Include="Unity.Addressables">
+        <HintPath>..\..\tools\AmongUs\Unhollowed\Unity.Addressables.dll</HintPath>
+      </Reference>
+      <Reference Include="Unity.Analytics.DataPrivacy">
+        <HintPath>..\..\tools\AmongUs\Unhollowed\Unity.Analytics.DataPrivacy.dll</HintPath>
+      </Reference>
+      <Reference Include="Unity.ResourceManager">
+        <HintPath>..\..\tools\AmongUs\Unhollowed\Unity.ResourceManager.dll</HintPath>
+      </Reference>
+      <Reference Include="Unity.TextMeshPro">
+        <HintPath>..\..\tools\AmongUs\Unhollowed\Unity.TextMeshPro.dll</HintPath>
+      </Reference>
+      <Reference Include="UnityEngine">
+        <HintPath>..\..\tools\AmongUs\Unhollowed\UnityEngine.dll</HintPath>
+      </Reference>
+      <Reference Include="UnityEngine.AIModule">
+        <HintPath>..\..\tools\AmongUs\Unhollowed\UnityEngine.AIModule.dll</HintPath>
+      </Reference>
+      <Reference Include="UnityEngine.AndroidJNIModule">
+        <HintPath>..\..\tools\AmongUs\Unhollowed\UnityEngine.AndroidJNIModule.dll</HintPath>
+      </Reference>
+      <Reference Include="UnityEngine.AnimationModule">
+        <HintPath>..\..\tools\AmongUs\Unhollowed\UnityEngine.AnimationModule.dll</HintPath>
+      </Reference>
+      <Reference Include="UnityEngine.AssetBundleModule">
+        <HintPath>..\..\tools\AmongUs\Unhollowed\UnityEngine.AssetBundleModule.dll</HintPath>
+      </Reference>
+      <Reference Include="UnityEngine.AudioModule">
+        <HintPath>..\..\tools\AmongUs\Unhollowed\UnityEngine.AudioModule.dll</HintPath>
+      </Reference>
+      <Reference Include="UnityEngine.CoreModule">
+        <HintPath>..\..\tools\AmongUs\Unhollowed\UnityEngine.CoreModule.dll</HintPath>
+      </Reference>
+      <Reference Include="UnityEngine.DirectorModule">
+        <HintPath>..\..\tools\AmongUs\Unhollowed\UnityEngine.DirectorModule.dll</HintPath>
+      </Reference>
+      <Reference Include="UnityEngine.GridModule">
+        <HintPath>..\..\tools\AmongUs\Unhollowed\UnityEngine.GridModule.dll</HintPath>
+      </Reference>
+      <Reference Include="UnityEngine.ImageConversionModule">
+        <HintPath>..\..\tools\AmongUs\Unhollowed\UnityEngine.ImageConversionModule.dll</HintPath>
+      </Reference>
+      <Reference Include="UnityEngine.IMGUIModule">
+        <HintPath>..\..\tools\AmongUs\Unhollowed\UnityEngine.IMGUIModule.dll</HintPath>
+      </Reference>
+      <Reference Include="UnityEngine.InputLegacyModule">
+        <HintPath>..\..\tools\AmongUs\Unhollowed\UnityEngine.InputLegacyModule.dll</HintPath>
+      </Reference>
+      <Reference Include="UnityEngine.InputModule">
+        <HintPath>..\..\tools\AmongUs\Unhollowed\UnityEngine.InputModule.dll</HintPath>
+      </Reference>
+      <Reference Include="UnityEngine.JSONSerializeModule">
+        <HintPath>..\..\tools\AmongUs\Unhollowed\UnityEngine.JSONSerializeModule.dll</HintPath>
+      </Reference>
+      <Reference Include="UnityEngine.ParticleSystemModule">
+        <HintPath>..\..\tools\AmongUs\Unhollowed\UnityEngine.ParticleSystemModule.dll</HintPath>
+      </Reference>
+      <Reference Include="UnityEngine.Physics2DModule">
+        <HintPath>..\..\tools\AmongUs\Unhollowed\UnityEngine.Physics2DModule.dll</HintPath>
+      </Reference>
+      <Reference Include="UnityEngine.PhysicsModule">
+        <HintPath>..\..\tools\AmongUs\Unhollowed\UnityEngine.PhysicsModule.dll</HintPath>
+      </Reference>
+      <Reference Include="UnityEngine.Purchasing">
+        <HintPath>..\..\tools\AmongUs\Unhollowed\UnityEngine.Purchasing.dll</HintPath>
+      </Reference>
+      <Reference Include="UnityEngine.Purchasing.SecurityCore">
+        <HintPath>..\..\tools\AmongUs\Unhollowed\UnityEngine.Purchasing.SecurityCore.dll</HintPath>
+      </Reference>
+      <Reference Include="UnityEngine.ScreenCaptureModule">
+        <HintPath>..\..\tools\AmongUs\Unhollowed\UnityEngine.ScreenCaptureModule.dll</HintPath>
+      </Reference>
+      <Reference Include="UnityEngine.SharedInternalsModule">
+        <HintPath>..\..\tools\AmongUs\Unhollowed\UnityEngine.SharedInternalsModule.dll</HintPath>
+      </Reference>
+      <Reference Include="UnityEngine.SpriteMaskModule">
+        <HintPath>..\..\tools\AmongUs\Unhollowed\UnityEngine.SpriteMaskModule.dll</HintPath>
+      </Reference>
+      <Reference Include="UnityEngine.SpriteShapeModule">
+        <HintPath>..\..\tools\AmongUs\Unhollowed\UnityEngine.SpriteShapeModule.dll</HintPath>
+      </Reference>
+      <Reference Include="UnityEngine.SubsystemsModule">
+        <HintPath>..\..\tools\AmongUs\Unhollowed\UnityEngine.SubsystemsModule.dll</HintPath>
+      </Reference>
+      <Reference Include="UnityEngine.TerrainModule">
+        <HintPath>..\..\tools\AmongUs\Unhollowed\UnityEngine.TerrainModule.dll</HintPath>
+      </Reference>
+      <Reference Include="UnityEngine.TextCoreModule">
+        <HintPath>..\..\tools\AmongUs\Unhollowed\UnityEngine.TextCoreModule.dll</HintPath>
+      </Reference>
+      <Reference Include="UnityEngine.TextRenderingModule">
+        <HintPath>..\..\tools\AmongUs\Unhollowed\UnityEngine.TextRenderingModule.dll</HintPath>
+      </Reference>
+      <Reference Include="UnityEngine.TilemapModule">
+        <HintPath>..\..\tools\AmongUs\Unhollowed\UnityEngine.TilemapModule.dll</HintPath>
+      </Reference>
+      <Reference Include="UnityEngine.UI">
+        <HintPath>..\..\tools\AmongUs\Unhollowed\UnityEngine.UI.dll</HintPath>
+      </Reference>
+      <Reference Include="UnityEngine.UIElementsNativeModule">
+        <HintPath>..\..\tools\AmongUs\Unhollowed\UnityEngine.UIElementsNativeModule.dll</HintPath>
+      </Reference>
+      <Reference Include="UnityEngine.UIModule">
+        <HintPath>..\..\tools\AmongUs\Unhollowed\UnityEngine.UIModule.dll</HintPath>
+      </Reference>
+      <Reference Include="UnityEngine.UnityAnalyticsModule">
+        <HintPath>..\..\tools\AmongUs\Unhollowed\UnityEngine.UnityAnalyticsModule.dll</HintPath>
+      </Reference>
+      <Reference Include="UnityEngine.UnityWebRequestAssetBundleModule">
+        <HintPath>..\..\tools\AmongUs\Unhollowed\UnityEngine.UnityWebRequestAssetBundleModule.dll</HintPath>
+      </Reference>
+      <Reference Include="UnityEngine.UnityWebRequestModule">
+        <HintPath>..\..\tools\AmongUs\Unhollowed\UnityEngine.UnityWebRequestModule.dll</HintPath>
+      </Reference>
+      <Reference Include="UnityEngine.VFXModule">
+        <HintPath>..\..\tools\AmongUs\Unhollowed\UnityEngine.VFXModule.dll</HintPath>
+      </Reference>
+      <Reference Include="UnityEngine.VideoModule">
+        <HintPath>..\..\tools\AmongUs\Unhollowed\UnityEngine.VideoModule.dll</HintPath>
+      </Reference>
+      <Reference Include="UnityEngine.VRModule">
+        <HintPath>..\..\tools\AmongUs\Unhollowed\UnityEngine.VRModule.dll</HintPath>
+      </Reference>
+      <Reference Include="UnityEngine.XRModule">
+        <HintPath>..\..\tools\AmongUs\Unhollowed\UnityEngine.XRModule.dll</HintPath>
+      </Reference>
+    </ItemGroup>
+
+    <Target Name="CopyCustomContent" AfterTargets="AfterBuild">
+        <Message Text="Second occurrence" />
+        <Copy SourceFiles="$(ProjectDir)\bin\$(Configuration)\netstandard2.1\TheOtherRolesGM.dll" DestinationFolder="$(AmongUsLatest)/BepInEx/plugins/" />
+    </Target>
+
+    <Target Name="PreBuild" BeforeTargets="PreBuildEvent">
+      <Exec Command="python &quot;$(SolutionDir)stringsToJson.py&quot;" />
+    </Target>
+</Project>
