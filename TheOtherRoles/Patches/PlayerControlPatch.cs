@@ -18,6 +18,14 @@ namespace TheOtherRoles.Patches
     {
         // Helpers
 
+        /// <summary>
+        /// コマンドターゲットの指定
+        /// </summary>
+        /// <param name="onlyCrewmates"></param>
+        /// <param name="targetPlayersInVents"></param>
+        /// <param name="untargetablePlayers">ターゲットに指定できないプレイヤーのリスト</param>
+        /// <param name="targetingPlayer"></param>
+        /// <returns></returns>
         public static PlayerControl setTarget(bool onlyCrewmates = false, bool targetPlayersInVents = false, List<PlayerControl> untargetablePlayers = null, PlayerControl targetingPlayer = null)
         {
             PlayerControl result = null;
@@ -975,9 +983,13 @@ namespace TheOtherRoles.Patches
             setPlayerOutline(Witch.currentTarget, Witch.color);
         }
 
-
+        /// <summary>
+        /// プレイヤー情報の更新処理
+        /// </summary>
+        /// <param name="__instance"></param>
         public static void Postfix(PlayerControl __instance)
         {
+            // ゲーム開始状態で無い場合は処理を抜ける
             if (AmongUsClient.Instance.GameState != InnerNet.InnerNetClient.GameStates.Started) return;
 
             // Mini and Morphling shrink
@@ -1051,6 +1063,7 @@ namespace TheOtherRoles.Patches
                 hackerUpdate();
             }
 
+            // GM Editionの役職の更新
             TheOtherRolesGM.FixedUpdate(__instance);
         }
     }

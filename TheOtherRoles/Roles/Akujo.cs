@@ -91,57 +91,84 @@ namespace TheOtherRoles
         /// <summary>会議終了時処理</summary>
         public override void OnMeetingEnd() { }
 
+        /// <summary>
+        /// 悪女の情報更新処理
+        /// </summary>
         public override void FixedUpdate()
         {
+            // 更新対象がプレイヤーの場合
             if (player == PlayerControl.LocalPlayer)
             {
                 if (timeLimitText != null)
                     timeLimitText.enabled = false;
 
+                // プレイヤーが生存中
                 if (player.isAlive())
                 {
-                    TheOtherRolesPlugin.Logger.LogInfo(String.Format("timeLeft:{0}, honmei: {1}, keepsLeft: {2}", timeLeft.ToString(), (honmei == null).ToString(), keepsLeft.ToString()));
+                    // 制限時間が残っていて、本命またはキープの指定が完了していない場合
                     if (timeLeft > 0 && (honmei == null || keepsLeft > 0))
                     {
+                        // ターゲットにできないプレイヤーをリスト化
                         List<PlayerControl> untargetablePlayers = new List<PlayerControl>();
                         if (honmei != null) untargetablePlayers.Add(honmei.player);
                         untargetablePlayers.AddRange(keeps.Select(x => x.player));
-
+                        // ターゲットとなるプレイヤーを取得
                         currentTarget = setTarget(untargetablePlayers: untargetablePlayers);
                         setPlayerOutline(currentTarget, Akujo.color);
 
                         if (timeLimitText != null)
                         {
+                            // 制限時間と能力ボタンを表示
                             timeLimitText.text = timeString;
                             timeLimitText.enabled = Helpers.ShowButtons;
                         }
                     }
+                    // 制限時間が残っておらず、本命またはキープの指定が完了していない場合
                     else if (timeLeft <= 0 && (honmei == null || keepsLeft > 0))
                     {
+                        // 悪女の最終結果を「自殺」に設定
                         MessageWriter writer = AmongUsClient.Instance.StartRpcImmediately(PlayerControl.LocalPlayer.NetId, (byte)CustomRPC.AkujoSuicide, Hazel.SendOption.Reliable, -1);
                         writer.Write(player.PlayerId);
                         AmongUsClient.Instance.FinishRpcImmediately(writer);
+                        // 悪女の自殺処理呼び出し
                         RPCProcedure.akujoSuicide(player.PlayerId);
                     }
                 }
             }
         }
 
+        /// <summary>
+        /// キル実施時の処理
+        /// </summary>
+        /// <param name="target"></param>
         public override void OnKill(PlayerControl target) { }
-
+        /// <summary>
+        /// 死亡時の処理
+        /// </summary>
+        /// <param name="killer">キラー</param>
         public override void OnDeath(PlayerControl killer = null)
         {
-            // player.clearAllTasks();
+            // 本命が指定済みで生存している場合
             if (honmei != null && honmei.player.isAlive())
             {
+                // キルまたは自殺の場合
                 if (killer != null)
+                    // 本命を自殺させる
                     honmei.player.MurderPlayer(honmei.player);
+                // 追放の場合
                 else
+                    // 本命を追放させる
                     honmei.player.Exiled();
+                // 本命プレイヤーの最終ステータスを「自殺」に設定する
                 finalStatuses[honmei.player.PlayerId] = FinalStatus.Suicide;
             }
         }
 
+        /// <summary>
+        /// 悪女のプレイヤーが切断した場合
+        /// </summary>
+        /// <param name="player"></param>
+        /// <param name="reason"></param>
         public override void HandleDisconnect(PlayerControl player, DisconnectReasons reason)
         {
             if (player == this.player)
@@ -272,68 +299,14 @@ namespace TheOtherRoles
         /// <param name="target">指定対象プレイヤー</param>
         public void setHonmei(PlayerControl target)
         {
-            //TheOtherRolesPlugin.Logger.LogInfo("start setHonmei()");
-            if (honmei != null)
-                return;
+            // 本命を指定済みの場合、処理を抜ける
+            if (honmei != null) return;
 
-            //TheOtherRolesPlugin.Logger.LogInfo("target to Json format:");
-            //TheOtherRolesPlugin.Logger.LogInfo(JsonUtility.ToJson(target, true));
-
-            //// タスクの引継ぎ方法が不明
-            //var targetTasks = target.myTasks;
-            //var targetTaskDatas = target.Data.Tasks;
-
-            //TheOtherRolesPlugin.Logger.LogInfo("target.PlayerTask to Json format:");
-            //foreach (var t in targetTasks)
-            //{
-            //    TheOtherRolesPlugin.Logger.LogInfo(JsonUtility.ToJson(t, true));
-            //}
-            //TheOtherRolesPlugin.Logger.LogInfo("target.Data.TaskInfo to Json format:");
-            //foreach (var d in targetTaskDatas)
-            //{
-            //    TheOtherRolesPlugin.Logger.LogInfo(JsonUtility.ToJson(d, true));
-            //}
-
-            // ターゲットを「本命」の役割を追加する
+            // ターゲットに「本命」の役割を追加する
             honmei = AkujoHonmei.addModifier(target);
 
-            //TheOtherRolesPlugin.Logger.LogInfo("honmei.player to Json format #1:");
-            //TheOtherRolesPlugin.Logger.LogInfo(JsonUtility.ToJson(honmei.player, true));
-            //TheOtherRolesPlugin.Logger.LogInfo("honmei.player.PlayerTask to Json format #1:");
-            //foreach (var t in honmei.player.myTasks)
-            //{
-            //    TheOtherRolesPlugin.Logger.LogInfo(JsonUtility.ToJson(t, true));
-            //}
-            //TheOtherRolesPlugin.Logger.LogInfo("honmei.player.Data.TaskInfo to Json format #1:");
-            //foreach(var d in honmei.player.Data.Tasks)
-            //{
-            //    TheOtherRolesPlugin.Logger.LogInfo(JsonUtility.ToJson(d, true));
-            //}
-
-            // ログを見た感じだと、タスクの上書きは必要無い
-            //if (targetTasks != null && targetTaskDatas != null)
-            //{
-            //    honmei.player.myTasks = targetTasks;
-            //    honmei.player.Data.Tasks = targetTaskDatas;
-            //}
-
-            // 本命に対する悪女を設定
+            // 本命に対する悪女を設定する
             honmei.akujo = this;
-
-            //TheOtherRolesPlugin.Logger.LogInfo("honmei.player to Json format #2:");
-            //TheOtherRolesPlugin.Logger.LogInfo(JsonUtility.ToJson(honmei.player, true));
-            //TheOtherRolesPlugin.Logger.LogInfo("honmei.player.PlayerTask to Json format #2:");
-            //foreach (var t in honmei.player.myTasks)
-            //{
-            //    TheOtherRolesPlugin.Logger.LogInfo(JsonUtility.ToJson(t, true));
-            //}
-            //TheOtherRolesPlugin.Logger.LogInfo("honmei.player.Data.TaskInfo to Json format #2:");
-            //foreach (var d in honmei.player.Data.Tasks)
-            //{
-            //    TheOtherRolesPlugin.Logger.LogInfo(JsonUtility.ToJson(d, true));
-            //}
-
-            //TheOtherRolesPlugin.Logger.LogInfo("end setHonmei()");
         }
         /// <summary>
         /// キープの指定
@@ -341,21 +314,16 @@ namespace TheOtherRoles
         /// <param name="target">指定対象プレイヤー</param>
         public void setKeep(PlayerControl target)
         {
-            //TheOtherRolesPlugin.Logger.LogInfo("start setKeep()");
-            if (keepsLeft <= 0)
-                return;
+            // キープの指定残数が0の場合、処理を抜ける
+            if (keepsLeft <= 0) return;
 
-            //TheOtherRolesPlugin.Logger.LogInfo("target to Json format:");
-            //TheOtherRolesPlugin.Logger.LogInfo(JsonUtility.ToJson(target, true));
-
+            // ターゲットに「キープ」の役割を追加する
             var keep = AkujoKeep.addModifier(target);
 
-            //TheOtherRolesPlugin.Logger.LogInfo("keep.player to Json format #1:");
-            //TheOtherRolesPlugin.Logger.LogInfo(JsonUtility.ToJson(keep.player, true));
-
+            // キープに対する悪女を設定する
             keep.akujo = this;
+            // キープのリストに追加する
             keeps.Add(keep);
-            //TheOtherRolesPlugin.Logger.LogInfo("end setKeep()");
         }
 
         public static bool isPartner(PlayerControl player, PlayerControl partner)
@@ -373,6 +341,10 @@ namespace TheOtherRoles
             return honmei?.player == partner || keeps.Any(x => x.player == partner);
         }
 
+        /// <summary>
+        /// 利用可能な色の取得
+        /// </summary>
+        /// <returns>色情報</returns>
         public static Color getAvailableColor()
         {
             var availableColors = new List<Color>(iconColors);
@@ -418,7 +390,6 @@ namespace TheOtherRoles
 
         public AkujoHonmei()
         {
-            //TheOtherRolesPlugin.Logger.LogInfo($"AkujoHonmei()");
             ModType = modId = ModifierType.AkujoHonmei;
 
             persistRoleChange = new List<RoleType>() {
@@ -435,7 +406,7 @@ namespace TheOtherRoles
 
         public override void OnDeath(PlayerControl killer = null)
         {
-            player.clearAllTasks();
+            // player.clearAllTasks();
             if (akujo != null && akujo.player.isAlive())
             {
                 if (killer != null)
@@ -477,7 +448,6 @@ namespace TheOtherRoles
 
         public AkujoKeep()
         {
-            //TheOtherRolesPlugin.Logger.LogInfo($"AkujoKeep()");
             ModType = modId = ModifierType.AkujoKeep;
 
             persistRoleChange = new List<RoleType>() {

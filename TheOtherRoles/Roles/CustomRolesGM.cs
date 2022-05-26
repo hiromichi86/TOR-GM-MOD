@@ -44,6 +44,10 @@ namespace TheOtherRoles
             //TheOtherRolesPlugin.Logger.LogInfo("end clearAndReloadRoles()");
         }
 
+        /// <summary>
+        /// プレイヤー情報の更新処理
+        /// </summary>
+        /// <param name="player"></param>
         public static void FixedUpdate(PlayerControl player)
         {
             Role.allRoles.DoIf(x => x.player == player, x => x.FixedUpdate());
