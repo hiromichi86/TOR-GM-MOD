@@ -296,8 +296,18 @@ namespace TheOtherRoles.Patches
                 {
                     if (akujo.player.isAlive() && akujo.honmei?.player != null && akujo.honmei.player.isAlive())
                     {
-                        TempData.winners.Add(new WinningPlayerData(akujo.player.Data));
-                        TempData.winners.Add(new WinningPlayerData(akujo.honmei.player.Data));
+                        var winnerAkujo = new WinningPlayerData(akujo.player.Data);
+                        var winnerHonmei = new WinningPlayerData(akujo.honmei.player.Data);
+                        if(!TempData.winners.Contains(winnerAkujo))
+                        {
+                            TempData.winners.Add(winnerAkujo);
+                        }
+                        if(!TempData.winners.Contains(winnerHonmei))
+                        {
+                            TempData.winners.Add(winnerHonmei);
+                        }
+                        //TempData.winners.Add(new WinningPlayerData(akujo.player.Data));
+                        //TempData.winners.Add(new WinningPlayerData(akujo.honmei.player.Data));
                     }
                 }
             }
