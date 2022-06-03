@@ -153,8 +153,8 @@ namespace TheOtherRoles
         /// <summary>能力ボタンのクールダウンタイム設定</summary>
         public static void SetButtonCooldowns()
         {
-            adminbutton.MaxTimer = 0f;
-            vitalButton.MaxTimer = 0f;
+            EvilHacker.adminbutton.MaxTimer = 0f;
+            EvilHacker.vitalButton.MaxTimer = 0f;
         }
         /// <summary>アドミンボタン処理</summary>
         public void openAdmin()
