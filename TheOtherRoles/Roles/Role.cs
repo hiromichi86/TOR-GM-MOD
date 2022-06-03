@@ -105,6 +105,7 @@ namespace TheOtherRoles
             { RoleType.Ninja, typeof(RoleBase<Ninja>) },
             { RoleType.NekoKabocha, typeof(RoleBase<NekoKabocha>) },
             { RoleType.SerialKiller, typeof(RoleBase<SerialKiller>) },
+            { RoleType.EvilHacker, typeof(RoleBase<EvilHacker>) },
 
             // Neutral
             { RoleType.Opportunist, typeof(RoleBase<Opportunist>) },
