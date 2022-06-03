@@ -13,12 +13,10 @@ namespace TheOtherRoles
     [HarmonyPatch]
     internal class EvilHacker : RoleBase<EvilHacker>
     {
-        /// <summary>アドミンボタン</summary>
-        private static CustomButton adminButton;
         /// <summary>役職カラー</summary>
         public static Color color = Palette.ImpostorRed;
         /// <summary>アドミンボタン</summary>
-        private static CustomButton adminbutton;
+        private static CustomButton adminButton;
         /// <summary>バイタルボタン</summary>
         private static CustomButton vitalButton;
         private static Minigame vitals = null;
@@ -153,8 +151,15 @@ namespace TheOtherRoles
         /// <summary>能力ボタンのクールダウンタイム設定</summary>
         public static void SetButtonCooldowns()
         {
-            EvilHacker.adminbutton.MaxTimer = 0f;
-            EvilHacker.vitalButton.MaxTimer = 0f;
+            TheOtherRolesPlugin.Logger.LogDebug("SetButtonCooldowns");
+            TheOtherRolesPlugin.Logger.LogDebug("set adminButton maxTimer");
+            adminButton.MaxTimer = 0f;
+            TheOtherRolesPlugin.Logger.LogDebug("set vitalButton minTimer");
+            vitalButton.MaxTimer = 0f;
+        }
+        public static void Clear()
+        {
+            players = new List<EvilHacker>();
         }
         /// <summary>アドミンボタン処理</summary>
         public void openAdmin()

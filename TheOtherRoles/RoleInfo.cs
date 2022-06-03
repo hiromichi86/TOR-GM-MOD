@@ -96,6 +96,7 @@ namespace TheOtherRoles
         public static RoleInfo fortuneTeller;
         public static RoleInfo sprinter;
         public static RoleInfo akujo;
+        public static RoleInfo evilHacker;
 
         public static void Init() {
             jester = new RoleInfo("jester", Jester.color, CustomOptionHolder.jesterSpawnRate, RoleType.Jester);
@@ -156,6 +157,7 @@ namespace TheOtherRoles
             fortuneTeller = new RoleInfo("fortuneTeller", FortuneTeller.color, CustomOptionHolder.fortuneTellerSpawnRate, RoleType.FortuneTeller);
             sprinter = new RoleInfo("sprinter", Sprinter.color, CustomOptionHolder.sprinterSpawnRate, RoleType.Sprinter);
             akujo = new RoleInfo("akujo", Akujo.color, CustomOptionHolder.akujoSpawnRate, RoleType.Akujo);
+            evilHacker = new RoleInfo("evilHacker", EvilHacker.color, CustomOptionHolder.evilHackerSpawnRate, RoleType.EvilHacker);
 
             allRoleInfos = new List<RoleInfo>() {
                 // Impostor roles
@@ -179,6 +181,7 @@ namespace TheOtherRoles
                 nekoKabocha,
                 serialKiller,
                 evilWatcher,
+                evilHacker,
 
                 // Crew roles
                 crewmate,
@@ -302,6 +305,7 @@ namespace TheOtherRoles
             }
             if (p.isRole(RoleType.Sprinter)) infos.Add(sprinter);
             if (p.isRole(RoleType.Akujo)) infos.Add(akujo);
+            if (p.isRole(RoleType.EvilHacker)) infos.Add(evilHacker);
 
             // Default roles
             if (infos.Count == 0 && p.Data.Role.IsImpostor) infos.Add(impostor); // Just Impostor

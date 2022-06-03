@@ -58,6 +58,7 @@ namespace TheOtherRoles
             FortuneTeller.MakeButtons(hm);
             Sprinter.MakeButtons(hm);
             Akujo.MakeButtons(hm);
+            EvilHacker.MakeButtons(hm);
 
             gmButtons = new List<CustomButton>();
             gmKillButtons = new List<CustomButton>();

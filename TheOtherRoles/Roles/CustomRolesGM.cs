@@ -40,6 +40,7 @@ namespace TheOtherRoles
             Fox.Clear();
             FortuneTeller.Clear();
             Akujo.Clear();
+            EvilHacker.Clear();
             Role.ClearAll();
             //TheOtherRolesPlugin.Logger.LogInfo("end clearAndReloadRoles()");
         }

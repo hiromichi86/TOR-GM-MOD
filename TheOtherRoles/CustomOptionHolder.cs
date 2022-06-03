@@ -466,7 +466,7 @@ namespace TheOtherRoles {
             nekoKabochaRevengeImpostor = CustomOption.Create(1023, "nekoKabochaRevengeImpostor", true, nekoKabochaSpawnRate);
             nekoKabochaRevengeExile = CustomOption.Create(1024, "nekoKabochaRevengeExile", false, nekoKabochaSpawnRate);
 
-            evilHackerSpawnRate = new CustomRoleOption(1060, "evilHacker", EvilHacker.color, 1);
+            evilHackerSpawnRate = new CustomRoleOption(1030, "evilHacker", EvilHacker.color, 3);
 
             madmateSpawnRate = new CustomRoleOption(360, "madmate", Madmate.color);
             madmateType = CustomOption.Create(366, "madmateType", new string[] { "madmateDefault", "madmateWithRole", "madmateRandom" }, madmateSpawnRate);
