@@ -351,6 +351,8 @@ namespace TheOtherRoles {
         public static CustomOption akujoKnowsRoles;
         public static CustomOption akujoNumKeeps;
 
+        public static CustomRoleOption evilHackerSpawnRate;
+
         public static CustomOption enabledHorseMode;
 
         internal static Dictionary<byte, byte[]> blockedRolePairings = new Dictionary<byte, byte[]>();
@@ -464,6 +466,7 @@ namespace TheOtherRoles {
             nekoKabochaRevengeImpostor = CustomOption.Create(1023, "nekoKabochaRevengeImpostor", true, nekoKabochaSpawnRate);
             nekoKabochaRevengeExile = CustomOption.Create(1024, "nekoKabochaRevengeExile", false, nekoKabochaSpawnRate);
 
+            evilHackerSpawnRate = new CustomRoleOption(1060, "evilHacker", EvilHacker.color, 1);
 
             madmateSpawnRate = new CustomRoleOption(360, "madmate", Madmate.color);
             madmateType = CustomOption.Create(366, "madmateType", new string[] { "madmateDefault", "madmateWithRole", "madmateRandom" }, madmateSpawnRate);
@@ -565,12 +568,10 @@ namespace TheOtherRoles {
             watcherSpawnRate = new CustomDualRoleOption(1040, "watcher", Watcher.color, RoleType.Watcher, 15);
 
 
-            //akujoSpawnRate = new CustomRoleOption(1060, "akujo", Akujo.color, 7, roleEnabled: false);
             akujoSpawnRate = new CustomRoleOption(1060, "akujo", Akujo.color, 7);
             akujoTimeLimit = CustomOption.Create(1061, "akujoTimeLimit", 300f, 30f, 1200f, 30f, akujoSpawnRate, format: "unitSeconds");
             akujoKnowsRoles = CustomOption.Create(1062, "akujoKnowsRoles", false, akujoSpawnRate);
             akujoNumKeeps = CustomOption.Create(1063, "akujoNumKeeps", 1f, 1f, 15f, 1f, akujoSpawnRate, format: "unitPlayers");
-
 
             foxSpawnRate = new CustomRoleOption(910, "fox", Fox.color, 1);
             foxCanFixReactorAndO2 = CustomOption.Create(911, "foxCanFixReactorAndO2", false, foxSpawnRate);

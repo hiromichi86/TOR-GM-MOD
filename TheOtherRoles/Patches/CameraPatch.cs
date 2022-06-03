@@ -9,6 +9,9 @@ using System.Reflection;
 
 namespace TheOtherRoles.Patches {
 
+    /// <summary>
+    /// ƒJƒƒ‰
+    /// </summary>
     [Harmony]
     public class CameraPatch
     {

@@ -15,6 +15,9 @@ using UnityEngine;
 using System.Reflection;
 
 namespace TheOtherRoles.Patches {
+    /// <summary>
+    /// 追放処理
+    /// </summary>
     [HarmonyPatch(typeof(ExileController), nameof(ExileController.Begin))]
     class ExileControllerBeginPatch {
         public static void Prefix(ExileController __instance, [HarmonyArgument(0)]ref GameData.PlayerInfo exiled, [HarmonyArgument(1)]bool tie) {
@@ -97,6 +100,9 @@ namespace TheOtherRoles.Patches {
         }
     }
 
+    /// <summary>
+    /// 追放時の追加処理
+    /// </summary>
     [HarmonyPatch]
     class ExileControllerWrapUpPatch {
 
@@ -127,6 +133,9 @@ namespace TheOtherRoles.Patches {
         }
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
     [HarmonyPatch(typeof(ExileController), nameof(ExileController.ReEnableGameplay))]
     class ExileControllerReEnableGameplayPatch
     {
@@ -212,6 +221,9 @@ namespace TheOtherRoles.Patches {
         }
     }
 
+    /// <summary>
+    /// 追放メッセージ
+    /// </summary>
     [HarmonyPatch(typeof(TranslationController), nameof(TranslationController.GetString), new Type[] { typeof(StringNames), typeof(Il2CppReferenceArray<Il2CppSystem.Object>) })]
     class ExileControllerMessagePatch {
         static void Postfix(ref string __result, [HarmonyArgument(0)]StringNames id) {

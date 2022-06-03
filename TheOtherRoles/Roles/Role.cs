@@ -61,6 +61,7 @@ namespace TheOtherRoles
         NekoKabocha,
         Madmate,
         SerialKiller,
+        EvilHacker,
 
 
         Mini = 150,

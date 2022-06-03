@@ -6,6 +6,9 @@ using UnityEngine;
 using static TheOtherRoles.TheOtherRoles;
 
 namespace TheOtherRoles.Patches {
+    /// <summary>
+    /// アドミン
+    /// </summary>
     [Harmony]
     public class AdminPatch
     {
@@ -229,6 +232,9 @@ namespace TheOtherRoles.Patches {
             }
         }
 
+        /// <summary>
+        /// アドミンのカウント領域のカウント更新処理
+        /// </summary>
         [HarmonyPatch(typeof(CounterArea), nameof(CounterArea.UpdateCount))]
         class CounterAreaUpdateCountPatch
         {
@@ -251,6 +257,7 @@ namespace TheOtherRoles.Patches {
                         {
                             if (defaultMat == null) defaultMat = renderer.material;
                             if (newMat == null) newMat = UnityEngine.Object.Instantiate<Material>(defaultMat);
+                            // ハッカーの場合にアドミンに色付きで表示する
                             if (showHackerInfo && colors.Count > i)
                             {
                                 renderer.material = newMat;

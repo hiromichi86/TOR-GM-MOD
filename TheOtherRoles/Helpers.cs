@@ -306,7 +306,11 @@ namespace TheOtherRoles {
         {
             return !isDead(player);
         }
-
+        /// <summary>
+        /// ‚»‚Ì‘¼w‰c‚©”Û‚©
+        /// </summary>
+        /// <param name="player"></param>
+        /// <returns>true:‚»‚Ì‘¼w‰c‚Å‚ ‚é false:‚»‚Ì‘¼w‰c‚Å‚Í‚È‚¢</returns>
         public static bool isNeutral(this PlayerControl player)
         {
             return (player != null &&
@@ -352,7 +356,11 @@ namespace TheOtherRoles {
                    (player.hasModifier(ModifierType.Madmate) && !Madmate.hasTasks) ||
                    (player.isLovers() && Lovers.separateTeam && !Lovers.tasksCount);
         }
-
+        /// <summary>
+        /// ƒ^ƒXƒN‚ª‚ ‚é‚»‚Ì‘¼w‰c‚©‚Ç‚¤‚©
+        /// </summary>
+        /// <param name="player">true:ƒ^ƒXƒN‚Ì‚ ‚é‚»‚Ì‘¼w‰c‚Å‚ ‚é false:ƒ^ƒXƒN‚Ì‚ ‚é‚»‚Ì‘¼w‰c‚Å‚Í‚È‚¢</param>
+        /// <returns></returns>
         public static bool neutralHasTasks(this PlayerControl player)
         {
             return player.isNeutral() && 

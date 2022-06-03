@@ -31,6 +31,7 @@ namespace TheOtherRoles
             Immoralist.SetButtonCooldowns();
             Sprinter.SetButtonCooldowns();
             Akujo.SetButtonCooldowns();
+            EvilHacker.SetButtonCooldowns();
 
             foreach (CustomButton gmButton in gmButtons)
             {

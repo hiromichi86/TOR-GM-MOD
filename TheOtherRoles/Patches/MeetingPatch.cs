@@ -93,8 +93,16 @@ namespace TheOtherRoles.Patches {
             }
         }
 
+        /// <summary>
+        /// 投票集計
+        /// </summary>
         [HarmonyPatch(typeof(MeetingHud), nameof(MeetingHud.CheckForEndVoting))]
         class MeetingCalculateVotesPatch {
+            /// <summary>
+            /// 投票集計
+            /// </summary>
+            /// <param name="__instance"></param>
+            /// <returns>投票情報(プレイヤーID, 投票数)</returns>
             private static Dictionary<byte, int> CalculateVotes(MeetingHud __instance) {
                 Dictionary<byte, int> dictionary = new Dictionary<byte, int>();
                 for (int i = 0; i < __instance.playerStates.Length; i++) {
