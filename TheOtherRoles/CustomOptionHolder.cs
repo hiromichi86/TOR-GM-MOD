@@ -352,8 +352,6 @@ namespace TheOtherRoles {
         public static CustomOption akujoNumKeeps;
 
         public static CustomRoleOption evilHackerSpawnRate;
-        public static CustomOption evilHackerKillCooldown;
-
 
         public static CustomOption enabledHorseMode;
 
@@ -468,8 +466,7 @@ namespace TheOtherRoles {
             nekoKabochaRevengeImpostor = CustomOption.Create(1023, "nekoKabochaRevengeImpostor", true, nekoKabochaSpawnRate);
             nekoKabochaRevengeExile = CustomOption.Create(1024, "nekoKabochaRevengeExile", false, nekoKabochaSpawnRate);
 
-            evilHackerSpawnRate = new CustomRoleOption(1070, "evilHacker", EvilHacker.color, 3);
-            evilHackerKillCooldown = CustomOption.Create(1071, "evilHackerKillCooldown", 15f, 2.5f, 60f, 2.5f, evilHackerKillCooldown, format: "unitSeconds");
+            evilHackerSpawnRate = new CustomRoleOption(1070, "evilHacker", EvilHacker.color, 1);
 
             madmateSpawnRate = new CustomRoleOption(360, "madmate", Madmate.color);
             madmateType = CustomOption.Create(366, "madmateType", new string[] { "madmateDefault", "madmateWithRole", "madmateRandom" }, madmateSpawnRate);

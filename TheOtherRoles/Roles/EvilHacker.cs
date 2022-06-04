@@ -21,8 +21,6 @@ namespace TheOtherRoles
         private static CustomButton vitalButton;
         private static Minigame vitals = null;
 
-        public static float killCooldown { get { return CustomOptionHolder.evilHackerKillCooldown.getFloat(); } }
-
         public EvilHacker()
         {
             RoleType = roleId = RoleType.EvilHacker;
@@ -88,8 +86,8 @@ namespace TheOtherRoles
                },
                getAdminButtonSprite(),
                new Vector3(-1.8f, -0.06f, 0),
-                hm,
-                hm.AbilityButton,
+               hm,
+               hm.AbilityButton,
                KeyCode.Q,
                true,
                0f,
@@ -101,7 +99,7 @@ namespace TheOtherRoles
                },
                PlayerControl.GameOptions.MapId == 3,
                DestroyableSingleton<TranslationController>.Instance.GetString(StringNames.Admin)
-                );
+               );
             adminButton.buttonText = ModTranslation.getString("EvilHackerAdminText");
 
             // バイタルボタン
@@ -133,8 +131,8 @@ namespace TheOtherRoles
                },
                getVitalButtonSprite(),
                new Vector3(-2.7f, -0.06f, 0),
-                hm,
-                hm.AbilityButton,
+               hm,
+               hm.AbilityButton,
                KeyCode.Q,
                true,
                0f,
@@ -146,7 +144,7 @@ namespace TheOtherRoles
                },
                PlayerControl.GameOptions.MapId == 3,
                DestroyableSingleton<TranslationController>.Instance.GetString(StringNames.Admin)
-                );
+               );
             adminButton.buttonText = ModTranslation.getString("EvilHackerAdminText");
         }
 
@@ -178,13 +176,7 @@ namespace TheOtherRoles
         /// キル時処理
         /// </summary>
         /// <param name="target"></param>
-        public override void OnKill(PlayerControl target)
-        {
-            if(PlayerControl.LocalPlayer == player)
-            {
-                player.SetKillTimerUnchecked(killCooldown);
-            }
-        }
+        public override void OnKill(PlayerControl target) { }
         /// <summary>
         /// 死亡時処理
         /// </summary>
@@ -193,13 +185,7 @@ namespace TheOtherRoles
         /// <summary>会議開始時処理</summary>
         public override void OnMeetingStart() { }
         /// <summary>会議終了時処理</summary>
-        public override void OnMeetingEnd()
-        {
-            if(PlayerControl.LocalPlayer == player)
-            {
-                player.SetKillTimerUnchecked(killCooldown);
-            }
-        }
+        public override void OnMeetingEnd() { }
         /// <summary>
         /// 切断時処理
         /// </summary>
