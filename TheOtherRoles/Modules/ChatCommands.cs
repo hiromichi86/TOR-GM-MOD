@@ -63,6 +63,7 @@ namespace TheOtherRoles.Modules {
                             TheOtherRolesPlugin.Logger.LogInfo(JsonUtility.ToJson(p, true));
                         }
                     } else if (text.ToLower().StartsWith("/setakujo ")) {
+                        TheOtherRolesPlugin.Logger.LogInfo(AmongUsClient.Instance.GameState.ToString());
                         TheOtherRolesPlugin.Logger.LogInfo(text.ToLower());
                         string playerId = text.Substring(10);
                         TheOtherRolesPlugin.Logger.LogInfo(String.Format("playerId: {0}", playerId));
@@ -72,23 +73,35 @@ namespace TheOtherRoles.Modules {
                             if (p.PlayerId.ToString() == playerId)
                             {
                                 TheOtherRolesPlugin.Logger.LogInfo(String.Format("setRole playerId: {0}", playerId));
-                                p.eraseAllRoles();
+                                TheOtherRolesPlugin.Logger.LogInfo(String.Format("Akujo time limit: {0}", Akujo.timeLimit));
+                                TheOtherRolesPlugin.Logger.LogInfo(String.Format("Akujo knows roles: {0}", Akujo.knowsRoles.ToString()));
+                                TheOtherRolesPlugin.Logger.LogInfo(String.Format("Akujo num keeps: {0}", Akujo.numKeeps.ToString()));
+                                PlayerControl.LocalPlayer.eraseAllRoles();
                                 p.setRole(RoleType.Akujo);
+                                //p.RpcSetRole(RoleTypes.Impostor);
                             }
                         }
                     } else if (text.ToLower().StartsWith("/sethonmei "))
                     {
                         TheOtherRolesPlugin.Logger.LogInfo(text.ToLower());
-                        string playerId = text.Substring(11);
-                        TheOtherRolesPlugin.Logger.LogInfo(String.Format("playerId: {0}", playerId));
+                        var list = text.Split(" ");
+                        string akujoId = list[1];
+                        string targetId = list[2];
+                        TheOtherRolesPlugin.Logger.LogInfo(String.Format("playerId: {0}, targetId: {1}", akujoId, targetId));
                         foreach (var p in PlayerControl.AllPlayerControls)
                         {
                             TheOtherRolesPlugin.Logger.LogInfo(String.Format("p.PlayerId: {0}", p.PlayerId.ToString()));
-                            if (p.PlayerId.ToString() == playerId)
+                            if (p.PlayerId.ToString() == akujoId)
                             {
-                                TheOtherRolesPlugin.Logger.LogInfo(String.Format("setHonmei AkujoId: {0}", playerId));
+                                TheOtherRolesPlugin.Logger.LogInfo(String.Format("setHonmei AkujoId: {0}", akujoId));
                                 Akujo akujo = Akujo.getRole(p);
-                                akujo.setHonmei(PlayerControl.LocalPlayer);
+                                foreach(var p2 in PlayerControl.AllPlayerControls)
+                                {
+                                    if(p.PlayerId.ToString() == targetId)
+                                    {
+                                        akujo.setHonmei(p2);
+                                    }
+                                }
                             }
                         }
                     } else if (text.ToLower().StartsWith("/setkeep "))

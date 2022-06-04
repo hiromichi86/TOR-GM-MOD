@@ -21,6 +21,8 @@ namespace TheOtherRoles
         private static CustomButton vitalButton;
         private static Minigame vitals = null;
 
+        public static float killCooldown { get { return CustomOptionHolder.evilHackerKillCooldown.getFloat(); } }
+
         public EvilHacker()
         {
             RoleType = roleId = RoleType.EvilHacker;
@@ -176,7 +178,13 @@ namespace TheOtherRoles
         /// キル時処理
         /// </summary>
         /// <param name="target"></param>
-        public override void OnKill(PlayerControl target) { }
+        public override void OnKill(PlayerControl target)
+        {
+            if(PlayerControl.LocalPlayer == player)
+            {
+                player.SetKillTimerUnchecked(killCooldown);
+            }
+        }
         /// <summary>
         /// 死亡時処理
         /// </summary>
@@ -185,7 +193,13 @@ namespace TheOtherRoles
         /// <summary>会議開始時処理</summary>
         public override void OnMeetingStart() { }
         /// <summary>会議終了時処理</summary>
-        public override void OnMeetingEnd() { }
+        public override void OnMeetingEnd()
+        {
+            if(PlayerControl.LocalPlayer == player)
+            {
+                player.SetKillTimerUnchecked(killCooldown);
+            }
+        }
         /// <summary>
         /// 切断時処理
         /// </summary>
