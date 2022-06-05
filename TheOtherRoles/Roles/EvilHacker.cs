@@ -61,6 +61,7 @@ namespace TheOtherRoles
         {
             // アドミンボタン
             adminButton = new CustomButton(
+               // Action OnClick
                () =>
                {
                    if (!MapBehaviour.Instance || !MapBehaviour.Instance.isActiveAndEnabled)
@@ -70,7 +71,9 @@ namespace TheOtherRoles
                    PlayerControl.LocalPlayer.NetTransform.Halt(); // Stop current movement 
                    //Hacker.chargesAdminTable--;
                },
-               () => { return PlayerControl.LocalPlayer.isRole(RoleType.EvilHacker) && PlayerControl.LocalPlayer.isAlive(); },
+               // Func<bool> HasButton
+               () => { return PlayerControl.LocalPlayer.isRole(RoleType.EvilHacker); },
+               // Func<bool> CouldUse
                () =>
                {
                    return true;
@@ -78,29 +81,40 @@ namespace TheOtherRoles
                    //    hackerAdminTableChargesText.text = hackerVitalsChargesText.text = String.Format(ModTranslation.getString("hackerChargesText"), Hacker.chargesAdminTable, Hacker.toolsNumber);
                    //return Hacker.chargesAdminTable > 0 && MapOptions.canUseAdmin; ;
                },
+               // Action OnMeetingEnds
                () =>
                {
                    //hackerAdminTableButton.Timer = hackerAdminTableButton.MaxTimer;
                    //hackerAdminTableButton.isEffectActive = false;
                    //hackerAdminTableButton.actionButton.cooldownTimerText.color = Palette.EnabledColor;
                },
+               // Sprite Sprite
                getAdminButtonSprite(),
+               // Vector3 PositionOffset
                new Vector3(-1.8f, -0.06f, 0),
+               // HudManager hudManager
                hm,
+               // ActionButton? textTemplate
                hm.AbilityButton,
+               // KeyCode? hotkey
                KeyCode.Q,
+               // bool HasEffect
                true,
+               // float EffectDuration
                0f,
+               // Action OnEffectEnds
                () =>
                {
                    //hackerAdminTableButton.Timer = hackerAdminTableButton.MaxTimer;
                    //if (!hackerVitalsButton.isEffectActive) PlayerControl.LocalPlayer.moveable = true;
                    if (MapBehaviour.Instance && MapBehaviour.Instance.isActiveAndEnabled) MapBehaviour.Instance.Close();
                },
+               // bool mirror = false
                PlayerControl.GameOptions.MapId == 3,
+               // string buttonText = null
                DestroyableSingleton<TranslationController>.Instance.GetString(StringNames.Admin)
                );
-            adminButton.buttonText = ModTranslation.getString("EvilHackerAdminText");
+            //adminButton.buttonText = ModTranslation.getString("EvilHackerAdminText");
 
             // バイタルボタン
             vitalButton = new CustomButton(
@@ -115,7 +129,7 @@ namespace TheOtherRoles
                    PlayerControl.LocalPlayer.moveable = false;
                    PlayerControl.LocalPlayer.NetTransform.Halt(); // Stop current movement 
                },
-               () => { return PlayerControl.LocalPlayer.isRole(RoleType.EvilHacker) && PlayerControl.LocalPlayer.isAlive(); },
+               () => { return PlayerControl.LocalPlayer.isRole(RoleType.EvilHacker); },
                () =>
                {
                    return true;
@@ -142,10 +156,10 @@ namespace TheOtherRoles
                    //if (!hackerVitalsButton.isEffectActive) PlayerControl.LocalPlayer.moveable = true;
                    if (MapBehaviour.Instance && MapBehaviour.Instance.isActiveAndEnabled) MapBehaviour.Instance.Close();
                },
-               PlayerControl.GameOptions.MapId == 3,
-               DestroyableSingleton<TranslationController>.Instance.GetString(StringNames.Admin)
+               false,
+               TranslationController.Instance.GetString(StringNames.VitalsLabel)
                );
-            adminButton.buttonText = ModTranslation.getString("EvilHackerAdminText");
+            //adminButton.buttonText = ModTranslation.getString("EvilHackerAdminText");
         }
 
         /// <summary>能力ボタンのクールダウンタイム設定</summary>
