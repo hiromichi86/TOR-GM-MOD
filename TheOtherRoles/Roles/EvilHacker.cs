@@ -64,8 +64,9 @@ namespace TheOtherRoles
                // Action OnClick
                () =>
                {
-                   if (!MapBehaviour.Instance || !MapBehaviour.Instance.isActiveAndEnabled)
-                       DestroyableSingleton<HudManager>.Instance.ShowMap((System.Action<MapBehaviour>)(m => m.ShowCountOverlay()));
+                   DestroyableSingleton<HudManager>.Instance.ShowMap((System.Action<MapBehaviour>)(m => m.ShowCountOverlay()));
+                   //if (!MapBehaviour.Instance || !MapBehaviour.Instance.isActiveAndEnabled)
+                   //    DestroyableSingleton<HudManager>.Instance.ShowMap((System.Action<MapBehaviour>)(m => m.ShowCountOverlay()));
 
                    PlayerControl.LocalPlayer.moveable = false;
                    PlayerControl.LocalPlayer.NetTransform.Halt(); // Stop current movement 
@@ -84,6 +85,7 @@ namespace TheOtherRoles
                // Action OnMeetingEnds
                () =>
                {
+                   PlayerControl.LocalPlayer.moveable = true;
                    //hackerAdminTableButton.Timer = hackerAdminTableButton.MaxTimer;
                    //hackerAdminTableButton.isEffectActive = false;
                    //hackerAdminTableButton.actionButton.cooldownTimerText.color = Palette.EnabledColor;
@@ -108,6 +110,7 @@ namespace TheOtherRoles
                    //hackerAdminTableButton.Timer = hackerAdminTableButton.MaxTimer;
                    //if (!hackerVitalsButton.isEffectActive) PlayerControl.LocalPlayer.moveable = true;
                    if (MapBehaviour.Instance && MapBehaviour.Instance.isActiveAndEnabled) MapBehaviour.Instance.Close();
+                   PlayerControl.LocalPlayer.moveable = true;
                },
                // bool mirror = false
                PlayerControl.GameOptions.MapId == 3,
@@ -118,6 +121,7 @@ namespace TheOtherRoles
 
             // バイタルボタン
             vitalButton = new CustomButton(
+               // Action OnClick
                () =>
                {
                    var e = UnityEngine.Object.FindObjectsOfType<SystemConsole>().FirstOrDefault(x => x.gameObject.name.Contains("panel_vitals"));
@@ -129,7 +133,9 @@ namespace TheOtherRoles
                    PlayerControl.LocalPlayer.moveable = false;
                    PlayerControl.LocalPlayer.NetTransform.Halt(); // Stop current movement 
                },
+               // Func<bool> HasButton
                () => { return PlayerControl.LocalPlayer.isRole(RoleType.EvilHacker); },
+               // Func<bool> CouldUse
                () =>
                {
                    return true;
@@ -137,26 +143,39 @@ namespace TheOtherRoles
                    //    hackerAdminTableChargesText.text = hackerVitalsChargesText.text = String.Format(ModTranslation.getString("hackerChargesText"), Hacker.chargesAdminTable, Hacker.toolsNumber);
                    //return Hacker.chargesAdminTable > 0 && MapOptions.canUseAdmin; ;
                },
+               // Action OnMeetingEnds
                () =>
                {
+                   PlayerControl.LocalPlayer.moveable = true;
                    //hackerAdminTableButton.Timer = hackerAdminTableButton.MaxTimer;
                    //hackerAdminTableButton.isEffectActive = false;
                    //hackerAdminTableButton.actionButton.cooldownTimerText.color = Palette.EnabledColor;
                },
+               // Sprite Sprite
                getVitalButtonSprite(),
+               // Vector3 PositionOffset
                new Vector3(-2.7f, -0.06f, 0),
+               // HudManager hudManager
                hm,
+               // ActionButton? textTemplate
                hm.AbilityButton,
+               // KeyCode? hotkey
                KeyCode.Q,
+               // bool HasEffect
                true,
+               // float EffectDuration
                0f,
+               // Action OnEffectEnds
                () =>
                {
                    //hackerAdminTableButton.Timer = hackerAdminTableButton.MaxTimer;
                    //if (!hackerVitalsButton.isEffectActive) PlayerControl.LocalPlayer.moveable = true;
                    if (MapBehaviour.Instance && MapBehaviour.Instance.isActiveAndEnabled) MapBehaviour.Instance.Close();
+                   PlayerControl.LocalPlayer.moveable = true;
                },
+               // bool mirror = false
                false,
+               // string buttonText = null
                TranslationController.Instance.GetString(StringNames.VitalsLabel)
                );
             //adminButton.buttonText = ModTranslation.getString("EvilHackerAdminText");
