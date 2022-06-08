@@ -99,7 +99,7 @@ namespace TheOtherRoles
                // ActionButton? textTemplate
                hm.AbilityButton,
                // KeyCode? hotkey
-               KeyCode.Q,
+               KeyCode.F,
                // bool HasEffect
                true,
                // float EffectDuration
@@ -160,7 +160,7 @@ namespace TheOtherRoles
                // ActionButton? textTemplate
                hm.AbilityButton,
                // KeyCode? hotkey
-               KeyCode.Q,
+               KeyCode.G,
                // bool HasEffect
                true,
                // float EffectDuration
