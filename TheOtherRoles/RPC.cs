@@ -96,7 +96,7 @@ namespace TheOtherRoles
         AkujoSetKeep,
         AkujoSuicide,
         EvilHackerAdmin,
-        EvilHackerVital,
+        EvilHackerVital
     }
 
     public static class RPCProcedure

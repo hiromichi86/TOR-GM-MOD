@@ -80,17 +80,11 @@ namespace TheOtherRoles
 
         public Akujo()
         {
-            TheOtherRolesPlugin.Logger.LogInfo("Akujo Constructor");
             RoleType = roleId = RoleType.Akujo;
             startTime = DateTime.UtcNow;
             honmei = null;
             keeps = new List<AkujoKeep>();
             iconColor = getAvailableColor();
-        }
-        public override void PostInit()
-        {
-            TheOtherRolesPlugin.Logger.LogInfo("Akujo PostInit");
-            MakeButtons(HudManager.Instance);
         }
 
         /// <summary>会議開始時処理</summary>
