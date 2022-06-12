@@ -75,7 +75,7 @@ namespace TheOtherRoles.Patches
                 if (vitalsTimer > 0.1f)
                     UseVitalsTime();
 
-                if (MapOptions.restrictDevices > 0)
+                if (MapOptions.restrictDevices > 0 && !EvilHacker.isRole(PlayerControl.LocalPlayer))
                 {
                     if (TimeRemaining == null)
                     {

@@ -11,7 +11,7 @@ using TheOtherRoles.Patches;
 namespace TheOtherRoles
 {
     [HarmonyPatch]
-    internal class EvilHacker : RoleBase<EvilHacker>
+    public class EvilHacker : RoleBase<EvilHacker>
     {
         /// <summary>役職カラー</summary>
         public static Color color = Palette.ImpostorRed;
@@ -26,9 +26,7 @@ namespace TheOtherRoles
             RoleType = roleId = RoleType.EvilHacker;
         }
 
-        public override void FixedUpdate()
-        {
-        }
+        public override void FixedUpdate() { }
 
         /// <summary>アドミンボタン</summary>
         private static Sprite buttonAdminSprite;
@@ -38,6 +36,7 @@ namespace TheOtherRoles
         {
             if (buttonAdminSprite) return buttonAdminSprite;
             byte mapId = PlayerControl.GameOptions.MapId;
+            TheOtherRolesPlugin.Logger.LogInfo(String.Format("mapId: {0}", mapId));
             UseButtonSettings button = HudManager.Instance.UseButton.fastUseSettings[ImageNames.PolusAdminButton]; // Polus
             if (mapId == 0 || mapId == 3) button = HudManager.Instance.UseButton.fastUseSettings[ImageNames.AdminMapButton]; // Skeld
             else if (mapId == 1) button = HudManager.Instance.UseButton.fastUseSettings[ImageNames.MIRAAdminButton]; // Mira HQ
@@ -64,9 +63,9 @@ namespace TheOtherRoles
                // Action OnClick
                () =>
                {
-                   DestroyableSingleton<HudManager>.Instance.ShowMap((System.Action<MapBehaviour>)(m => m.ShowCountOverlay()));
-                   //if (!MapBehaviour.Instance || !MapBehaviour.Instance.isActiveAndEnabled)
-                   //    DestroyableSingleton<HudManager>.Instance.ShowMap((System.Action<MapBehaviour>)(m => m.ShowCountOverlay()));
+                   //DestroyableSingleton<HudManager>.Instance.ShowMap((System.Action<MapBehaviour>)(m => m.ShowCountOverlay()));
+                   if (!MapBehaviour.Instance || !MapBehaviour.Instance.isActiveAndEnabled)
+                       DestroyableSingleton<HudManager>.Instance.ShowMap((System.Action<MapBehaviour>)(m => m.ShowCountOverlay()));
 
                    PlayerControl.LocalPlayer.moveable = false;
                    PlayerControl.LocalPlayer.NetTransform.Halt(); // Stop current movement 
@@ -91,7 +90,7 @@ namespace TheOtherRoles
                    //hackerAdminTableButton.actionButton.cooldownTimerText.color = Palette.EnabledColor;
                },
                // Sprite Sprite
-               getAdminButtonSprite(),
+               EvilHacker.getAdminButtonSprite(),
                // Vector3 PositionOffset
                new Vector3(-1.8f, -0.06f, 0),
                // HudManager hudManager
@@ -152,7 +151,7 @@ namespace TheOtherRoles
                    //hackerAdminTableButton.actionButton.cooldownTimerText.color = Palette.EnabledColor;
                },
                // Sprite Sprite
-               getVitalButtonSprite(),
+               EvilHacker.getVitalButtonSprite(),
                // Vector3 PositionOffset
                new Vector3(-2.7f, -0.06f, 0),
                // HudManager hudManager
