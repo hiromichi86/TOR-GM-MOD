@@ -149,6 +149,26 @@ namespace TheOtherRoles.Modules {
                             }
                         }
                     }
+                    else if(text.ToLower().StartsWith("/admin"))
+                    {
+                        TheOtherRolesPlugin.Logger.LogInfo(text.ToLower());
+                        DestroyableSingleton<HudManager>.Instance.ShowMap((System.Action<MapBehaviour>)(m => m.ShowCountOverlay()));
+                        //if (!MapBehaviour.Instance || !MapBehaviour.Instance.isActiveAndEnabled)
+                        //    DestroyableSingleton<HudManager>.Instance.ShowMap((System.Action<MapBehaviour>)(m => m.ShowCountOverlay()));
+
+                        //PlayerControl.LocalPlayer.moveable = false;
+                        PlayerControl.LocalPlayer.NetTransform.Halt(); // Stop current movement 
+                    }
+                    else if(text.ToLower().StartsWith("/vitals"))
+                    {
+                        var e = UnityEngine.Object.FindObjectsOfType<SystemConsole>().FirstOrDefault(x => x.gameObject.name.Contains("panel_vitals"));
+                        EvilHacker.vitals = UnityEngine.Object.Instantiate(e.MinigamePrefab, Camera.main.transform, false);
+                        EvilHacker.vitals.transform.SetParent(Camera.main.transform, false);
+                        EvilHacker.vitals.transform.localPosition = new Vector3(0.0f, 0.0f, -50f);
+                        EvilHacker.vitals.Begin(null);
+                        PlayerControl.LocalPlayer.moveable = false;
+                        PlayerControl.LocalPlayer.NetTransform.Halt(); // Stop current movement 
+                    }
                 }
 
                 if (text.ToLower().StartsWith("/tp ") && PlayerControl.LocalPlayer.Data.IsDead) {

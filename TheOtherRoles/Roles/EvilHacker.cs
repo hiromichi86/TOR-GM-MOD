@@ -19,7 +19,7 @@ namespace TheOtherRoles
         private static CustomButton adminButton;
         /// <summary>バイタルボタン</summary>
         private static CustomButton vitalButton;
-        private static Minigame vitals = null;
+        public static Minigame vitals = null;
 
         public EvilHacker()
         {
@@ -99,7 +99,7 @@ namespace TheOtherRoles
                // ActionButton? textTemplate
                hm.AbilityButton,
                // KeyCode? hotkey
-               KeyCode.F,
+               KeyCode.X,
                // bool HasEffect
                true,
                // float EffectDuration
@@ -160,7 +160,7 @@ namespace TheOtherRoles
                // ActionButton? textTemplate
                hm.AbilityButton,
                // KeyCode? hotkey
-               KeyCode.G,
+               KeyCode.Z,
                // bool HasEffect
                true,
                // float EffectDuration
