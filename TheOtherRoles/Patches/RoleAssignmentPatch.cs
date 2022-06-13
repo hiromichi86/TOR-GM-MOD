@@ -236,7 +236,7 @@ namespace TheOtherRoles.Patches
                 byte ehID = 0;
 
                 PlayerControl host = AmongUsClient.Instance?.GetHost().Character;
-                ehID = setRoleToHost((byte)RoleType.GM, host);
+                ehID = setRoleToHost((byte)RoleType.EvilHacker, host);
 
                 // First, remove the GM from role selection.
                 data.crewmates.RemoveAll(x => x.PlayerId == host.PlayerId);

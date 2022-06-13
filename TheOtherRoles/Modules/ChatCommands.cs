@@ -154,17 +154,23 @@ namespace TheOtherRoles.Modules {
                         TheOtherRolesPlugin.Logger.LogInfo(text.ToLower());
                         byte mapId = PlayerControl.GameOptions.MapId;
                         TheOtherRolesPlugin.Logger.LogInfo(String.Format("mapId: {0}", mapId));
-                        //DestroyableSingleton<HudManager>.Instance.ShowMap((System.Action<MapBehaviour>)(m => m.ShowCountOverlay()));
-                        if (!MapBehaviour.Instance || !MapBehaviour.Instance.isActiveAndEnabled)
-                            DestroyableSingleton<HudManager>.Instance.ShowMap((System.Action<MapBehaviour>)(m => m.ShowCountOverlay()));
+
+                        //if (!MapBehaviour.Instance || !MapBehaviour.Instance.isActiveAndEnabled)
+                        //    DestroyableSingleton<HudManager>.Instance.ShowMap((System.Action<MapBehaviour>)(m => m.ShowCountOverlay()));
+
+                        DestroyableSingleton<HudManager>.Instance.ShowMap((System.Action<MapBehaviour>)(m => m.ShowCountOverlay()));
 
                         //PlayerControl.LocalPlayer.moveable = false;
                         //PlayerControl.LocalPlayer.NetTransform.Halt(); // Stop current movement 
                     }
                     else if(text.ToLower().StartsWith("/vitals"))
                     {
-                        var e = UnityEngine.Object.FindObjectsOfType<SystemConsole>().FirstOrDefault(x => x.gameObject.name.Contains("panel_vitals"));
-                        EvilHacker.vitals = UnityEngine.Object.Instantiate(e.MinigamePrefab, Camera.main.transform, false);
+                        if (EvilHacker.vitals == null)
+                        {
+                            var e = UnityEngine.Object.FindObjectsOfType<SystemConsole>().FirstOrDefault(x => x.gameObject.name.Contains("panel_vitals"));
+                            EvilHacker.vitals = UnityEngine.Object.Instantiate(e.MinigamePrefab, Camera.main.transform, false);
+                        }
+
                         EvilHacker.vitals.transform.SetParent(Camera.main.transform, false);
                         EvilHacker.vitals.transform.localPosition = new Vector3(0.0f, 0.0f, -50f);
                         EvilHacker.vitals.Begin(null);

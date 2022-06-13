@@ -96,9 +96,9 @@ namespace TheOtherRoles
                // HudManager hudManager
                hm,
                // ActionButton? textTemplate
-               hm.AbilityButton,
+               hm.AdminButton,
                // KeyCode? hotkey
-               KeyCode.X,
+               null,
                // bool HasEffect
                true,
                // float EffectDuration
@@ -123,9 +123,12 @@ namespace TheOtherRoles
                // Action OnClick
                () =>
                {
-                   var e = UnityEngine.Object.FindObjectsOfType<SystemConsole>().FirstOrDefault(x => x.gameObject.name.Contains("panel_vitals"));
-                   if (e == null || Camera.main == null) return;
-                   EvilHacker.vitals = UnityEngine.Object.Instantiate(e.MinigamePrefab, Camera.main.transform, false);
+                   if(EvilHacker.vitals == null)
+                   {
+                       var e = UnityEngine.Object.FindObjectsOfType<SystemConsole>().FirstOrDefault(x => x.gameObject.name.Contains("panel_vitals"));
+                       if (e == null || Camera.main == null) return;
+                       EvilHacker.vitals = UnityEngine.Object.Instantiate(e.MinigamePrefab, Camera.main.transform, false);
+                   }
                    EvilHacker.vitals.transform.SetParent(Camera.main.transform, false);
                    EvilHacker.vitals.transform.localPosition = new Vector3(0.0f, 0.0f, -50f);
                    EvilHacker.vitals.Begin(null);
@@ -138,17 +141,11 @@ namespace TheOtherRoles
                () =>
                {
                    return true;
-                   //if (hackerAdminTableChargesText != null)
-                   //    hackerAdminTableChargesText.text = hackerVitalsChargesText.text = String.Format(ModTranslation.getString("hackerChargesText"), Hacker.chargesAdminTable, Hacker.toolsNumber);
-                   //return Hacker.chargesAdminTable > 0 && MapOptions.canUseAdmin; ;
                },
                // Action OnMeetingEnds
                () =>
                {
                    PlayerControl.LocalPlayer.moveable = true;
-                   //hackerAdminTableButton.Timer = hackerAdminTableButton.MaxTimer;
-                   //hackerAdminTableButton.isEffectActive = false;
-                   //hackerAdminTableButton.actionButton.cooldownTimerText.color = Palette.EnabledColor;
                },
                // Sprite Sprite
                EvilHacker.getVitalButtonSprite(),
@@ -159,7 +156,7 @@ namespace TheOtherRoles
                // ActionButton? textTemplate
                hm.AbilityButton,
                // KeyCode? hotkey
-               KeyCode.Z,
+               null,
                // bool HasEffect
                true,
                // float EffectDuration
@@ -177,7 +174,6 @@ namespace TheOtherRoles
                // string buttonText = null
                TranslationController.Instance.GetString(StringNames.VitalsLabel)
                );
-            //adminButton.buttonText = ModTranslation.getString("EvilHackerAdminText");
         }
 
         /// <summary>能力ボタンのクールダウンタイム設定</summary>
