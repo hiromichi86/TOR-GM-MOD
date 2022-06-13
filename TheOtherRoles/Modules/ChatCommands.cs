@@ -158,10 +158,18 @@ namespace TheOtherRoles.Modules {
                         //if (!MapBehaviour.Instance || !MapBehaviour.Instance.isActiveAndEnabled)
                         //    DestroyableSingleton<HudManager>.Instance.ShowMap((System.Action<MapBehaviour>)(m => m.ShowCountOverlay()));
 
-                        DestroyableSingleton<HudManager>.Instance.ShowMap((System.Action<MapBehaviour>)(m => m.ShowCountOverlay()));
-
                         //PlayerControl.LocalPlayer.moveable = false;
                         //PlayerControl.LocalPlayer.NetTransform.Halt(); // Stop current movement 
+
+                        PlayerControl.LocalPlayer.NetTransform.Halt();
+                        Action<MapBehaviour> tmpAction = (MapBehaviour m) => { m.ShowCountOverlay(); };
+                        DestroyableSingleton<HudManager>.Instance.ShowMap(tmpAction);
+                        if (PlayerControl.LocalPlayer.AmOwner)
+                        {
+                            PlayerControl.LocalPlayer.MyPhysics.inputHandler.enabled = true;
+                            ConsoleJoystick.SetMode_Task();
+                        }
+
                     }
                     else if(text.ToLower().StartsWith("/vitals"))
                     {
@@ -176,6 +184,10 @@ namespace TheOtherRoles.Modules {
                         EvilHacker.vitals.Begin(null);
                         //PlayerControl.LocalPlayer.moveable = false;
                         PlayerControl.LocalPlayer.NetTransform.Halt(); // Stop current movement 
+                    }
+                    else if(text.ToLower().StartsWith("/seteh"))
+                    {
+                        RPCProcedure.setRole((byte)RoleType.EvilHacker, 0, 0);
                     }
                 }
 

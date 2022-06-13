@@ -64,12 +64,23 @@ namespace TheOtherRoles
                () =>
                {
                    //DestroyableSingleton<HudManager>.Instance.ShowMap((System.Action<MapBehaviour>)(m => m.ShowCountOverlay()));
-                   if (!MapBehaviour.Instance || !MapBehaviour.Instance.isActiveAndEnabled)
-                       DestroyableSingleton<HudManager>.Instance.ShowMap((System.Action<MapBehaviour>)(m => m.ShowCountOverlay()));
+                   //if (!MapBehaviour.Instance || !MapBehaviour.Instance.isActiveAndEnabled)
+                   //    DestroyableSingleton<HudManager>.Instance.ShowMap((System.Action<MapBehaviour>)(m => m.ShowCountOverlay()));
 
-                   PlayerControl.LocalPlayer.moveable = false;
-                   PlayerControl.LocalPlayer.NetTransform.Halt(); // Stop current movement 
-                   //Hacker.chargesAdminTable--;
+                   //hm.ShowMap((System.Action<MapBehaviour>)(m => m.ShowCountOverlay()));
+
+                   //PlayerControl.LocalPlayer.moveable = false;
+                   //PlayerControl.LocalPlayer.NetTransform.Halt(); // Stop current movement 
+                   // Hacker.chargesAdminTable--;
+
+                   PlayerControl.LocalPlayer.NetTransform.Halt();
+                   Action<MapBehaviour> tmpAction = (MapBehaviour m) => { m.ShowCountOverlay(); };
+                   DestroyableSingleton<HudManager>.Instance.ShowMap(tmpAction);
+                   if (PlayerControl.LocalPlayer.AmOwner)
+                   {
+                       PlayerControl.LocalPlayer.MyPhysics.inputHandler.enabled = true;
+                       ConsoleJoystick.SetMode_Task();
+                   }
                },
                // Func<bool> HasButton
                () => { return PlayerControl.LocalPlayer.isRole(RoleType.EvilHacker); },
@@ -96,11 +107,11 @@ namespace TheOtherRoles
                // HudManager hudManager
                hm,
                // ActionButton? textTemplate
-               hm.AdminButton,
+               null,
                // KeyCode? hotkey
                null,
                // bool HasEffect
-               true,
+               false,
                // float EffectDuration
                0f,
                // Action OnEffectEnds
@@ -154,11 +165,11 @@ namespace TheOtherRoles
                // HudManager hudManager
                hm,
                // ActionButton? textTemplate
-               hm.AbilityButton,
+               null,
                // KeyCode? hotkey
                null,
                // bool HasEffect
-               true,
+               false,
                // float EffectDuration
                0f,
                // Action OnEffectEnds

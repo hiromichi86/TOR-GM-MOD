@@ -241,6 +241,7 @@ namespace TheOtherRoles.Patches
                 // First, remove the GM from role selection.
                 data.crewmates.RemoveAll(x => x.PlayerId == host.PlayerId);
                 data.impostors.RemoveAll(x => x.PlayerId == host.PlayerId);
+                data.maxImpostorRoles--;
             }
             #endregion
 
