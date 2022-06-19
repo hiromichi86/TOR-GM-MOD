@@ -143,7 +143,7 @@ namespace TheOtherRoles
                    EvilHacker.vitals.transform.SetParent(Camera.main.transform, false);
                    EvilHacker.vitals.transform.localPosition = new Vector3(0.0f, 0.0f, -50f);
                    EvilHacker.vitals.Begin(null);
-                   PlayerControl.LocalPlayer.moveable = false;
+                   //PlayerControl.LocalPlayer.moveable = false;
                    PlayerControl.LocalPlayer.NetTransform.Halt(); // Stop current movement 
                },
                // Func<bool> HasButton
