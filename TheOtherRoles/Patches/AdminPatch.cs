@@ -107,7 +107,7 @@ namespace TheOtherRoles.Patches {
 
                 playerColors = new Dictionary<SystemTypes, List<Color>>();
 
-                if (MapOptions.restrictDevices > 0)
+                if (MapOptions.restrictDevices > 0 && !EvilHacker.isRole(PlayerControl.LocalPlayer))
                 {
                     if (OutOfTime == null)
                     {
