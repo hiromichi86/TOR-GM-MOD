@@ -63,16 +63,6 @@ namespace TheOtherRoles
                // Action OnClick
                () =>
                {
-                   //DestroyableSingleton<HudManager>.Instance.ShowMap((System.Action<MapBehaviour>)(m => m.ShowCountOverlay()));
-                   //if (!MapBehaviour.Instance || !MapBehaviour.Instance.isActiveAndEnabled)
-                   //    DestroyableSingleton<HudManager>.Instance.ShowMap((System.Action<MapBehaviour>)(m => m.ShowCountOverlay()));
-
-                   //hm.ShowMap((System.Action<MapBehaviour>)(m => m.ShowCountOverlay()));
-
-                   //PlayerControl.LocalPlayer.moveable = false;
-                   //PlayerControl.LocalPlayer.NetTransform.Halt(); // Stop current movement 
-                   // Hacker.chargesAdminTable--;
-
                    PlayerControl.LocalPlayer.NetTransform.Halt();
                    Action<MapBehaviour> tmpAction = (MapBehaviour m) => { m.ShowCountOverlay(); };
                    DestroyableSingleton<HudManager>.Instance.ShowMap(tmpAction);
@@ -85,21 +75,9 @@ namespace TheOtherRoles
                // Func<bool> HasButton
                () => { return PlayerControl.LocalPlayer.isRole(RoleType.EvilHacker); },
                // Func<bool> CouldUse
-               () =>
-               {
-                   return true;
-                   //if (hackerAdminTableChargesText != null)
-                   //    hackerAdminTableChargesText.text = hackerVitalsChargesText.text = String.Format(ModTranslation.getString("hackerChargesText"), Hacker.chargesAdminTable, Hacker.toolsNumber);
-                   //return Hacker.chargesAdminTable > 0 && MapOptions.canUseAdmin; ;
-               },
+               () => { return true; },
                // Action OnMeetingEnds
-               () =>
-               {
-                   PlayerControl.LocalPlayer.moveable = true;
-                   //hackerAdminTableButton.Timer = hackerAdminTableButton.MaxTimer;
-                   //hackerAdminTableButton.isEffectActive = false;
-                   //hackerAdminTableButton.actionButton.cooldownTimerText.color = Palette.EnabledColor;
-               },
+               () => { PlayerControl.LocalPlayer.moveable = true; },
                // Sprite Sprite
                EvilHacker.getAdminButtonSprite(),
                // Vector3 PositionOffset
@@ -117,8 +95,6 @@ namespace TheOtherRoles
                // Action OnEffectEnds
                () =>
                {
-                   //hackerAdminTableButton.Timer = hackerAdminTableButton.MaxTimer;
-                   //if (!hackerVitalsButton.isEffectActive) PlayerControl.LocalPlayer.moveable = true;
                    if (MapBehaviour.Instance && MapBehaviour.Instance.isActiveAndEnabled) MapBehaviour.Instance.Close();
                    PlayerControl.LocalPlayer.moveable = true;
                },
@@ -127,7 +103,6 @@ namespace TheOtherRoles
                // string buttonText = null
                DestroyableSingleton<TranslationController>.Instance.GetString(StringNames.Admin)
                );
-            //adminButton.buttonText = ModTranslation.getString("EvilHackerAdminText");
 
             // バイタルボタン
             vitalButton = new CustomButton(
@@ -143,21 +118,16 @@ namespace TheOtherRoles
                    EvilHacker.vitals.transform.SetParent(Camera.main.transform, false);
                    EvilHacker.vitals.transform.localPosition = new Vector3(0.0f, 0.0f, -50f);
                    EvilHacker.vitals.Begin(null);
-                   //PlayerControl.LocalPlayer.moveable = false;
                    PlayerControl.LocalPlayer.NetTransform.Halt(); // Stop current movement 
                },
                // Func<bool> HasButton
                () => { return PlayerControl.LocalPlayer.isRole(RoleType.EvilHacker); },
                // Func<bool> CouldUse
                () =>
-               {
-                   return true;
-               },
+               { return true; },
                // Action OnMeetingEnds
                () =>
-               {
-                   PlayerControl.LocalPlayer.moveable = true;
-               },
+               { PlayerControl.LocalPlayer.moveable = true; },
                // Sprite Sprite
                EvilHacker.getVitalButtonSprite(),
                // Vector3 PositionOffset
@@ -175,8 +145,6 @@ namespace TheOtherRoles
                // Action OnEffectEnds
                () =>
                {
-                   //hackerAdminTableButton.Timer = hackerAdminTableButton.MaxTimer;
-                   //if (!hackerVitalsButton.isEffectActive) PlayerControl.LocalPlayer.moveable = true;
                    if (MapBehaviour.Instance && MapBehaviour.Instance.isActiveAndEnabled) MapBehaviour.Instance.Close();
                    PlayerControl.LocalPlayer.moveable = true;
                },
@@ -190,28 +158,14 @@ namespace TheOtherRoles
         /// <summary>能力ボタンのクールダウンタイム設定</summary>
         public static void SetButtonCooldowns()
         {
-            TheOtherRolesPlugin.Logger.LogDebug("SetButtonCooldowns");
-            TheOtherRolesPlugin.Logger.LogDebug("set adminButton maxTimer");
             adminButton.MaxTimer = 0f;
-            TheOtherRolesPlugin.Logger.LogDebug("set vitalButton minTimer");
             vitalButton.MaxTimer = 0f;
         }
         public static void Clear()
         {
             players = new List<EvilHacker>();
         }
-        /// <summary>アドミンボタン処理</summary>
-        public void openAdmin()
-        {
-
-        }
-        /// <summary>バイタルボタン処理</summary>
-        public void openVital()
-        {
-
-        }
-
-        /// <summary>
+         /// <summary>
         /// キル時処理
         /// </summary>
         /// <param name="target"></param>

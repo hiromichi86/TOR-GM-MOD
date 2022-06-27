@@ -229,22 +229,6 @@ namespace TheOtherRoles.Patches
                 }
             }
 
-            #region 動作確認用（特定の役職をホストに割り振る）
-            // EvilHackerをホストに割り振る
-            if (CustomOptionHolder.evilHackerIsHost.getBool() == true)
-            {
-                byte ehID = 0;
-
-                PlayerControl host = AmongUsClient.Instance?.GetHost().Character;
-                ehID = setRoleToHost((byte)RoleType.EvilHacker, host);
-
-                // First, remove the GM from role selection.
-                data.crewmates.RemoveAll(x => x.PlayerId == host.PlayerId);
-                data.impostors.RemoveAll(x => x.PlayerId == host.PlayerId);
-                data.maxImpostorRoles--;
-            }
-            #endregion
-
             // Assign lovers, but only if akujo isn't enabled.
             if (CustomOptionHolder.loversSpawnRate.enabled && !CustomOptionHolder.akujoSpawnRate.enabled)
             {
